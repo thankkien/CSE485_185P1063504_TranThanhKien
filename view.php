@@ -57,7 +57,7 @@
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fas fa-location-arrow fa-stack-1x fa-inverse"></i>
                             </span>
-                            <span class="text-capitalize fs-5 align-middle"><?php echo "$cont[6], $cont[5], $cont[4], $cont[3]"; ?></span>
+                            <span class="text-capitalize fs-5 align-middle"><?php if (!empty($cont[6])){echo "$cont[6], ";} echo "$cont[5], $cont[4], $cont[3]"; ?></span>
                         </div>
                         <div id="phone" class="my-2">
                             <span class="fa-stack fa-1x">

@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/9a1e49c746.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="js/notify.js"></script>
     <title>My Curriculum Vitae - Register</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="img/iconlogo.png" type="image/x-icon">
@@ -37,17 +38,16 @@
                 $query = mysqli_query($conn, $sql);
                 if ($query) {
                     include("mailer-activate.php");
-                    echo "Đăng kí thành công!!";
                     echo '<script type="text/javascript">window.location = "http://localhost/BaiTapLon/page-login.php"</script>';
                 } else {
                     echo "$sql $conn->error";
                 }
                 mysqli_close($conn);
             } else {
-                echo "Mật khẩu không khớp!!";
+                echo "<script type='text/javascript'> notify('Cant login!! Accoutn or password are incorect', 'danger'); </script>";
             }
         } else {
-            echo "Tài khoản đã tồn tại!!";
+            echo "<script type='text/javascript'> notify('Account is available!!', 'danger'); </script>";
         }
     } ?>
 

@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/9a1e49c746.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="js/notify.js"></script>
     <title>My Curriculum Vitae - Account</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="img/iconlogo.png" type="image/x-icon">
@@ -40,21 +41,21 @@
             if (isset($_POST["Update"])) {
                 $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
                 if ($check !== false) {
-                    echo "File is an image - " . $check["mime"] . ".";
+                    echo "<script type='text/javascript'> notify('File is an image - " . $check["mime"] . "', 'danger'); </script>";
                     $uploadOk = 1;
                 } else {
-                    echo "File is not an image.";
+                    echo "<script type='text/javascript'> notify('File is not an image.', 'danger'); </script>";
                     $uploadOk = 0;
                 }
             }
             // Check if file already exists
             if (file_exists($target_file)) {
-                echo "Sorry, file already exists.";
+                echo "<script type='text/javascript'> notify('Sorry, file already exists.', 'danger'); </script>";
                 $uploadOk = 0;
             }
             // Check file size
             if ($_FILES["fileToUpload"]["size"] > 320000000) {
-                echo "Sorry, your file is too large.";
+                echo "<script type='text/javascript'> notify('Sorry, your file is too large.', 'danger'); </script>";
                 $uploadOk = 0;
             }
             // Allow certain file formats
@@ -62,7 +63,7 @@
                 $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                 && $imageFileType != "gif"
             ) {
-                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                echo "<script type='text/javascript'> notify('Sorry, only JPG, JPEG, PNG & GIF files are allowed.', 'danger'); </script>";
                 $uploadOk = 0;
             }
             // Check if $uploadOk is set to 0 by an error
@@ -74,7 +75,7 @@
                 if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                     echo "The file " . $ava . " has been uploaded. ";
                 } else {
-                    echo "Sorry, there was an error uploading your file.";
+                    echo "<script type='text/javascript'> notify('Sorry, there was an error uploading your file.', 'danger'); </script>";
                     header("Refresh: 3; url=" . $_SERVER['PHP_SELF']);
                 }
             }
@@ -83,10 +84,10 @@
 
         $query = mysqli_query($conn, $sql);
         if ($query) {
-            echo "Successful avatar update!!";
+            echo "<script type='text/javascript'> notify('Successful avatar update!!', 'success'); </script>";
             header("Refresh: 3; url=" . $_SERVER['PHP_SELF']);
         } else {
-            echo "$sql $conn->error";
+            echo "<script type='text/javascript'> notify('$conn->error', 'danger'); </script>";
         }
         mysqli_close($conn);
     }
@@ -101,7 +102,7 @@
             include("mailer-activate.php");
             echo '<script type="text/javascript">window.location = "http://localhost/BaiTapLon/account.php"</script>';
         } else {
-            echo "$sql $conn->error";
+            echo "<script type='text/javascript'> notify('$conn->error', 'danger'); </script>";
         }
         mysqli_close($conn);
     }
@@ -123,19 +124,19 @@
                     $sql = "UPDATE `users` SET `password` = '$hashed_new_pass' WHERE `user_id` = $id";
                     $query = mysqli_query($conn, $sql);
                     if ($query) {
-                        echo "Password changed successfully!!";
+                        echo "<script type='text/javascript'> notify('Password changed successfully!!', 'danger'); </script>";
                         header("Refresh: 3; url=" . $_SERVER['PHP_SELF']);
                     } else {
-                        echo "$sql $conn->error";
+                        echo "<script type='text/javascript'> notify('$conn->error', 'danger'); </script>";
                     }
                 } else {
-                    echo "New password doesn't match";
+                    echo "<script type='text/javascript'> notify('New password doesn't match', 'danger'); </script>";
                 }
             } else {
-                echo "Old password is incorrect";
+                echo "<script type='text/javascript'> notify('Old password is incorrect', 'danger'); </script>";
             }
         } else {
-            echo "An unknown error";
+            echo "<script type='text/javascript'> notify('An unknown error', 'danger'); </script>";
         }
         mysqli_close($conn);
     }
@@ -203,7 +204,7 @@
         </div>
     </div>
 
-    <?php include("footer.php");?>
+    <?php include("footer.php"); ?>
 </body>
 
 </html>

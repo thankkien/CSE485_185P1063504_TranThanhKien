@@ -45,3 +45,5 @@
         </div>
     </div>
 </nav>
+
+<div id="notify" class="container position-absolute top-0 start-50 translate-middle mt-5"></div>
